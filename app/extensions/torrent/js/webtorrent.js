@@ -1,7 +1,7 @@
 (function () {
   let webtorrentEntryPage = 'gen/webtorrentPage.entry.js'
 
-  chrome.ipc.on('language', (e, detail) => {
+  chrome.ipcRenderer.on('language', (e, detail) => {
     document.l10n.requestLanguages([detail.langCode])
     document.getElementsByName('availableLanguages')[0].content = detail.languageCodes.join(', ')
   })
@@ -12,6 +12,6 @@
     po.src = webtorrentEntryPage
     var s = document.getElementsByTagName('script')[0]
     s.parentNode.insertBefore(po, s)
-    chrome.ipc.send('request-language')
+    chrome.ipcRenderer.send('request-language')
   })
 })()
